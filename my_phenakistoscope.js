@@ -1,7 +1,7 @@
 const SLICE_COUNT = 10;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(ANIMATED_DISK); // STATIC_FRAME // ANIMATED_FRAME // STATIC_DISK // ANIMATED_DISK
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
@@ -9,41 +9,62 @@ function setup_pScope(pScope){
 }
 
 function setup_layers(pScope){
-
   new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
 
-  var layer1 = new PLayer(faces);
-  layer1.mode( SWIRL(5) );
-  layer1.set_boundary( 200, 1000 );
+  pScope.load_image('synapse_bg' , 'png');
+  var layer1 = new PLayer(bg);
+  layer1.mode(RING);
 
-  var layer2 = new PLayer(squares);
-  layer2.mode( RING );
-  layer2.set_boundary( 0, 400 );
+  var layer2 = new PLayer(ladybirds);
+  layer2.mode(SWIRL(5));
+  layer2.set_boundary(200, 1050);
 }
 
-function faces(x, y, animation, pScope){
+function bg(x, y, animation, pScope) {
+  pScope.draw_image('synapse_bg', 0, -500);
+}
+
+function ladybirds(x, y, animation, pScope){
+  rotate((animation.wave() * 90) - 45);
+  translate(((animation.wave() * 180) - 90) * animation.frame, 0);
   
-  scale(animation.frame*2);
+  // legs
+  stroke(color('#111'));
+  strokeWeight(4);
+  strokeJoin(ROUND);
+  strokeCap(ROUND);
+  let xx = Math.sin(PI / 3) * 75;
+  let yy = Math.cos(PI / 3) * 75;
+  line(xx, yy, -xx, -yy);
+  line(xx, -yy, -xx, yy);
+  line(-75, 0, 75, 0);
 
-  ellipse(0,0,50,50); // draw head
-  fill(30);
-  ellipse(-10,-10,10,10); //draw eye
-  ellipse(10,-10,10,10); // draw eye
-  arc(0,10,20,10,0,180); // draw mouth
+  // head / body / eyes
+  noStroke();
+  fill(color('#111'));
+  ellipse(0, -30, 90, 90);
+  ellipse(0, 0, 90, 90);
+  fill(color('#EEE'));
+  ellipse(-16, -63, 20, 10); ellipse(16, -63, 20, 10);
+  fill(color('#111'));
+  ellipse(-16, -64, 14, 7); ellipse(16, -64, 14, 7);
 
-}
+  // wings
+  stroke(color('#111'));
+  strokeWeight(4);
+  strokeJoin(ROUND);
+  strokeCap(ROUND);
+  fill(color('#E00'));
+  arc(0, 0, 110, 110, 100, 270, CHORD);
+  arc(0, 0, 110, 110, 270, 80, CHORD);
 
-function squares(x, y, animation, pScope){
-
-  // this is how you set up a background for a specific layer
-  let angleOffset = (360 / SLICE_COUNT) / 2
-  let backgroundArcStart = 270 - angleOffset;
-  let backgroundArcEnd = 270 + angleOffset;
-
-  fill(66, 135, 245)
-  arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
-
-  fill(255)
-  rect(-10,-300-animation.wave()*50,20,20) // .wave is a cosine wave btw
-
+  // spots
+  noStroke();
+  fill(color('#111'));
+  ellipse(-30, 0, 25, 25); ellipse(30, 0, 25, 25);
+  ellipse(-20, 30, 15, 15); ellipse(20, 30, 15, 15);
+  ellipse(-20, -35, 15, 15); ellipse(20, -35, 15, 15);
+  ellipse(-35, 25, 8, 8); ellipse(35, 25, 8, 8);
+  ellipse(-35, -25, 12, 12); ellipse(35, -25, 12, 12);
+  ellipse(-15, -15, 8, 8); ellipse(15, -15, 8, 8);
 }
