@@ -11,7 +11,7 @@ function setup_pScope(pScope){
 function setup_layers(pScope){
   new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
 
-  pScope.load_image('synapse_bg' , 'png');
+  pScope.load_image('test2' , 'png');
   var layer1 = new PLayer(bg);
   layer1.mode(RING);
 
@@ -21,7 +21,7 @@ function setup_layers(pScope){
 }
 
 function bg(x, y, animation, pScope) {
-  pScope.draw_image('synapse_bg', 0, -500);
+  pScope.draw_image('test2', 0, -500);
 }
 
 function ladybirds(x, y, animation, pScope){
@@ -29,7 +29,7 @@ function ladybirds(x, y, animation, pScope){
   translate(((animation.wave() * 180) - 90) * animation.frame, 0);
   
   // legs
-  stroke(color('#111'));
+  stroke(color('#302721'));
   strokeWeight(4);
   strokeJoin(ROUND);
   strokeCap(ROUND);
@@ -41,26 +41,26 @@ function ladybirds(x, y, animation, pScope){
 
   // head / body / eyes
   noStroke();
-  fill(color('#111'));
+  fill(color('#302721'));
   ellipse(0, -30, 90, 90);
   ellipse(0, 0, 90, 90);
   fill(color('#EEE'));
   ellipse(-16, -63, 20, 10); ellipse(16, -63, 20, 10);
-  fill(color('#111'));
+  fill(color('#302721'));
   ellipse(-16, -64, 14, 7); ellipse(16, -64, 14, 7);
 
   // wings
-  stroke(color('#111'));
+  stroke(color('#302721'));
   strokeWeight(4);
   strokeJoin(ROUND);
   strokeCap(ROUND);
-  fill(color('#E00'));
+  fill(color('#D83059'));
   arc(0, 0, 110, 110, 100, 270, CHORD);
   arc(0, 0, 110, 110, 270, 80, CHORD);
 
   // spots
   noStroke();
-  fill(color('#111'));
+  fill(color('#302721'));
   ellipse(-30, 0, 25, 25); ellipse(30, 0, 25, 25);
   ellipse(-20, 30, 15, 15); ellipse(20, 30, 15, 15);
   ellipse(-20, -35, 15, 15); ellipse(20, -35, 15, 15);
