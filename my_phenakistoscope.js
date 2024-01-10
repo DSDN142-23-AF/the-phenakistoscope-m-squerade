@@ -11,7 +11,7 @@ function setup_pScope(pScope){
 function setup_layers(pScope){
   new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
 
-  pScope.load_image('test2' , 'png');
+  pScope.load_image('smooth_test2' , 'png');
   var layer1 = new PLayer(bg);
   layer1.mode(RING);
 
@@ -21,7 +21,7 @@ function setup_layers(pScope){
 }
 
 function bg(x, y, animation, pScope) {
-  pScope.draw_image('test2', 0, -500);
+  pScope.draw_image('smooth_test2', 0, -500);
 }
 
 function ladybirds(x, y, animation, pScope){
